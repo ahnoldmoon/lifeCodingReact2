@@ -40,6 +40,7 @@ class App extends Component{
       _title = this.state.contents[0].title;
       _desc = this.state.contents[0].desc;
     }
+    console.log('munnt',this);
     return(
       <div>
       {/* <Subject 
@@ -48,6 +49,9 @@ class App extends Component{
       </Subject> */}
       <header>
           <h1><a href="/" onClick={function(e){
+            console.log('event in', this);
+            e.preventDefault();
+            return;
             console.log(e);
             e.preventDefault();
             // this.state.mode = 'welcome';
@@ -56,7 +60,7 @@ class App extends Component{
             })
             // debugger;
             // alert('hi');
-          }.bind(this)}>{this.state.subject.title}</a></h1>
+          }}>{this.state.subject.title}</a></h1>
           {this.state.subject.sub}
       </header>
       <TOC data={this.state.contents}></TOC>
