@@ -21,6 +21,7 @@ class App extends Component{
     super(props);
     this.state = {
       mode:'read',
+      selected_content_id:2,
       subject:{title:'WEB', sub:'World Wide Web!'},
       welcome:{title:'Welcome', desc:'Hello, React!!'},
       contents:[
@@ -37,8 +38,16 @@ class App extends Component{
       _title = this.state.welcome.title;
       _desc = this.state.welcome.desc;
     } else if (this.state.mode === 'read'){
-      _title = this.state.contents[0].title;
-      _desc = this.state.contents[0].desc;
+      var i = 0;
+      while(i < this.state.contents.length){
+        var data = this.state.contents[i];
+        if(data.id === this.state.selected_content_id){
+          _title = data.title;
+          _desc = data.desc;
+          break;
+        }
+        i = i + 1;
+      }
     }
     console.log('munnt',this);
     return(
@@ -53,9 +62,13 @@ class App extends Component{
       >
       </Subject>
       <TOC 
-        onChangePage={function(){
+        onChangePage={function(id){
+          // debugger;
           // alert('hi');
-          this.setState({mode:'read'});
+          this.setState({
+            mode:'read',
+            selected_content_id:Number(id)
+          });
         }.bind(this)} 
         data={this.state.contents}>
       </TOC>
